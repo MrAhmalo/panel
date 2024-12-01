@@ -1,3 +1,6 @@
+echo "Enabling maintenance mode..."
+php artisan down
+
 echo "Updating package list and installing required packages..."
 apk update && apk add git curl || {
     echo "Failed to install required packages. Exiting."
@@ -33,3 +36,10 @@ else
 fi
 
 echo "Operation completed successfully. The new CSS file is in $TARGET_DIR."
+
+echo "Clearing cache..."
+php artisan view:clear
+php artisan cache:clear
+
+echo "Disabling maintenance mode..."
+php artisan up

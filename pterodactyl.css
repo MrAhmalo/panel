@@ -538,6 +538,10 @@ body {
     background-color: #1c252e;
 }
 
+body.bg-neutral-800 {
+    bsackground-color: #441464;
+}
+
 .main-footer {
     background: #1f2933;
     color: #9aa5b1;
