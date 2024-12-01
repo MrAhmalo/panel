@@ -23,7 +23,7 @@
  @import 'checkbox.css';
 
 .login-page {
-    background: #10529f;
+    background: #441464;
 }
 
 #login-position-elements {
@@ -166,7 +166,7 @@ p.small {
 }
 
 .hasFileHover {
-    border: 2px dashed #0087F7;
+    border: 2px dashed #6f21a3;
     border-top: 0 !important;
     border-radius: 5px;
     margin: 0;
@@ -263,8 +263,8 @@ span[aria-labelledby="select2-pUserId-container"] {
 
 .alert-info {
     color: #ffffff !important;
-    background: #408fec !important;
-    border: 1px solid #1055a5;
+    background: #441464 !important;
+    border: 1px solid #6f21a3;
 }
 
 .alert-success {
@@ -292,9 +292,9 @@ span[aria-labelledby="select2-pUserId-container"] {
 }
 
 .callout.callout-info.callout-slim {
-    border: 1px solid #1055a5 !important;
-    border-left: 5px solid #1055a5 !important;
-    border-right: 5px solid #1055a5 !important;
+    border: 1px solid #6f21a3 !important;
+    border-left: 5px solid #6f21a3 !important;
+    border-right: 5px solid #6f21a3 !important;
     color: #777 !important;
     background: transparent !important;
 }
@@ -344,7 +344,7 @@ span[aria-labelledby="select2-pUserId-container"] {
 .select2-container{ width: 100% !important; }
 
 .nav-tabs-custom > .nav-tabs > li:hover {
-    border-top-color:#3c8dbc;
+    border-top-color:#992ee0;
 }
 
 .nav-tabs-custom > .nav-tabs > li.active.tab-danger, .nav-tabs-custom > .nav-tabs > li.tab-danger:hover {
@@ -356,7 +356,7 @@ span[aria-labelledby="select2-pUserId-container"] {
 }
 
 .nav-tabs-custom > .nav-tabs > li.active.tab-info, .nav-tabs-custom > .nav-tabs > li.tab-info:hover {
-    border-top-color: #0097bc;
+    border-top-color: #6f21a3;
 }
 
 .nav-tabs-custom > .nav-tabs > li.active.tab-warning, .nav-tabs-custom > .nav-tabs > li.tab-warning:hover {
@@ -397,7 +397,7 @@ span[aria-labelledby="select2-pUserId-container"] {
 }
 
 .btn.active, .btn.active.focus {
-    background-color: #408fec;
+    background-color: #7821a3;
 }
 
 .strong {
@@ -579,13 +579,13 @@ body {
 }
 
 .btn-primary {
-    background-color: #0967d3;
-    border-color: #0550b3;
+    background-color: #611a84;
+    border-color: #611a84;
 }
 
 .btn.btn-primary:hover {
-    background-color: #0550b3;
-    border-color: #0345a0;
+    background-color: #7821a3;
+    border-color: #7821a3;
 }
 
 .box {
