@@ -1,5 +1,5 @@
 /**
-    Custom Version 1
+    Custom Version 2.1
  * Pterodactyl - Panel
  * Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com>
  *
@@ -22,6 +22,10 @@
  * SOFTWARE.
  */
  @import 'checkbox.css';
+
+body.bg-neutral-800 {
+    background-color: #441464 !important;
+}
 
 .login-page {
     background: #10529f;
@@ -537,10 +541,6 @@ body {
 
 .skin-blue .main-header .logo:hover {
     background-color: #1c252e;
-}
-
-body.bg-neutral-800 {
-    background-color: #441464 !important;
 }
 
 .main-footer {
