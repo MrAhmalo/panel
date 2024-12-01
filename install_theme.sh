@@ -37,9 +37,9 @@ fi
 
 echo "Operation completed successfully. The new CSS file is in $TARGET_DIR."
 
-echo "Clearing cache..."
-php artisan view:clear
-php artisan cache:clear
+#echo "Clearing cache..."
+#php artisan view:clear
+#php artisan cache:clear
 
-echo "Disabling maintenance mode..."
-php artisan up
+#echo "Disabling maintenance mode..."
+#php artisan up
