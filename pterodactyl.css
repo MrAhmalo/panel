@@ -540,7 +540,7 @@ body {
 }
 
 body.bg-neutral-800 {
-    bsackground-color: #441464;
+    background-color: #441464 !important;
 }
 
 .main-footer {
