@@ -1,45 +1,90 @@
-echo "Enabling maintenance mode..."
-php artisan down
+#/bin/sh
 
-echo "Updating package list and installing required packages..."
-apk update && apk add git curl || {
-    echo "Failed to install required packages. Exiting."
-    exit 1
+if (( $EUID != 0 )); then
+    echo "This script must be run as root. Exiting."
+    exit
+fi
+
+installTheme(){
+    # Prepare
+    php artisan down
+
+    echo "Updating package list and installing required packages..."
+    sleep 2   
+    apk update && apk add git curl || {
+        echo "Failed to install required packages. Exiting."
+        exit 1
+    }
+
+    # Main
+    echo "Installing theme..."
+    sleep 2
+
+    TARGET_DIR="/app/public/themes/pterodactyl/css"
+    TARGET_FILE="pterodactyl.css"
+    REPO_URL="https://raw.githubusercontent.com/MrAhmalo/panel/refs/heads/1.0-develop/$TARGET_FILE"
+
+    if cd "$TARGET_DIR"; then
+        #echo "Successfully navigated to $TARGET_DIR."
+    else
+        echo "Directory $TARGET_DIR does not exist. Exiting."
+        exit 1
+    fi
+
+    echo "Deleting old $TARGET_FILE..."
+    if rm -f "$TARGET_FILE"; then
+        #echo "Old $TARGET_FILE deleted successfully."
+    else
+        #echo "Failed to delete $TARGET_FILE. Check permissions. Exiting."
+        exit 1
+    fi
+
+    #echo "Downloading new $TARGET_FILE from repository..."
+    if curl -o "$TARGET_FILE" "$REPO_URL"; then
+        #echo "New $TARGET_FILE downloaded successfully."
+    else
+        echo "Failed to download $TARGET_FILE from $REPO_URL. Exiting."
+        exit 1
+    fi
+
+    # Cleanup
+    echo "Finishing up..."
+    sleep 2
+    php artisan view:clear
+    php artisan cache:clear
+
+    php artisan up
+
+    sleep 3
+    echo "Operation completed successfully. Theme installed."
 }
 
-TARGET_DIR="/app/public/themes/pterodactyl/css"
-TARGET_FILE="pterodactyl.css"
-REPO_URL="https://raw.githubusercontent.com/MrAhmalo/panel/refs/heads/1.0-develop/$TARGET_FILE"
+echo "Copyright (c) 2024 Ahmalo | MrAhmalo | SirAhmalo"
+echo "This program is free software: you can redistribute it and/or modify"
+echo ""
+echo "Website: https://portfolio.golegana.de"
+echo ""
+echo "[1] Install theme"
+echo "[2] Uninstall theme"
+echo "[3] Exit"
 
-echo "Navigating to $TARGET_DIR..."
-if cd "$TARGET_DIR"; then
-    echo "Successfully navigated to $TARGET_DIR."
-else
-    echo "Directory $TARGET_DIR does not exist. Exiting."
-    exit 1
+read -p "Please enter a number: " choice
+if [ $choice == "1" ]
+    then
+    while true; do
+        read -p "Are you sure that you want to install the theme [y/n]? " yn
+        case $yn in
+            [Yy]* ) installTheme; break;;
+            [Nn]* ) exit;;
+            * ) echo "Please answer yes (y) or no (n).";;
+        esac
+    done
 fi
-
-echo "Deleting old $TARGET_FILE..."
-if rm -f "$TARGET_FILE"; then
-    echo "Old $TARGET_FILE deleted successfully."
-else
-    echo "Failed to delete $TARGET_FILE. Check permissions. Exiting."
-    exit 1
+if [ $choice == "2" ]
+    then
+    exit
 fi
-
-echo "Downloading new $TARGET_FILE from repository..."
-if curl -o "$TARGET_FILE" "$REPO_URL"; then
-    echo "New $TARGET_FILE downloaded successfully."
-else
-    echo "Failed to download $TARGET_FILE from $REPO_URL. Exiting."
-    exit 1
+if [ $choice == "3" ]
+    then
+    exit
 fi
-
-echo "Operation completed successfully. The new CSS file is in $TARGET_DIR."
-
-#echo "Clearing cache..."
-#php artisan view:clear
-#php artisan cache:clear
-
-#echo "Disabling maintenance mode..."
-#php artisan up
