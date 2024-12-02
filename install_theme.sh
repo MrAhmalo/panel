@@ -1,10 +1,5 @@
 #/bin/sh
 
-if (( $EUID != 0 )); then
-    echo "This script must be run as root. Exiting."
-    exit
-fi
-
 installTheme(){
     # Prepare
     php artisan down
@@ -25,7 +20,7 @@ installTheme(){
     REPO_URL="https://raw.githubusercontent.com/MrAhmalo/panel/refs/heads/1.0-develop/$TARGET_FILE"
 
     if cd "$TARGET_DIR"; then
-        #echo "Successfully navigated to $TARGET_DIR."
+        echo ""
     else
         echo "Directory $TARGET_DIR does not exist. Exiting."
         exit 1
@@ -33,15 +28,13 @@ installTheme(){
 
     echo "Deleting old $TARGET_FILE..."
     if rm -f "$TARGET_FILE"; then
-        #echo "Old $TARGET_FILE deleted successfully."
+        echo ""
     else
-        #echo "Failed to delete $TARGET_FILE. Check permissions. Exiting."
         exit 1
     fi
 
-    #echo "Downloading new $TARGET_FILE from repository..."
     if curl -o "$TARGET_FILE" "$REPO_URL"; then
-        #echo "New $TARGET_FILE downloaded successfully."
+        echo ""
     else
         echo "Failed to download $TARGET_FILE from $REPO_URL. Exiting."
         exit 1
